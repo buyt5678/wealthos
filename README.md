@@ -1,38 +1,23 @@
-# WEALTHOS v1.0
+# WEALTHOS v2.0
 
-A lightweight, mobile-friendly financial education and savings-tracking prototype.
+A static web app prototype with Supabase email authentication and per-user cloud storage for savings goals and user-entered transaction records.
 
-## Features
-- USD savings tracker
-- Editable savings goal
-- Local browser storage
-- Compound-growth illustration calculator
-- Investing education cards
-- Responsive dark green / black interface
-- Basic installable PWA manifest
+## Configure Supabase
 
-## Run locally
-Open `index.html` in a browser. No build tools are required.
+1. Copy `config.example.js` and name the copy `config.js`.
+2. Open `config.js`.
+3. Set `supabaseUrl` to your Supabase Project URL.
+4. Set `supabasePublishableKey` to your Supabase Publishable key (`sb_publishable_...`).
+5. Never use a Supabase Secret key or `service_role` key in browser code.
 
-## Deploy free using GitHub + Netlify (Android-friendly)
-1. Extract this ZIP on your phone.
-2. In Chrome, visit https://github.com and create a free account or sign in.
-3. Create a new **public** repository named `wealthos`.
-4. Choose **Add file → Upload files** and upload the contents of this folder (index.html, styles.css, app.js, manifest.webmanifest, icon.svg, README.md). Upload the files themselves, not the ZIP.
-5. Commit the upload.
-6. Visit https://app.netlify.com and sign up / sign in.
-7. In Netlify choose **Add new site → Import an existing project → GitHub**.
-8. Authorize GitHub and select your `wealthos` repository.
-9. For a plain static site, leave build command empty and publish directory as `/` (or `.` if the interface requires a value). Deploy.
-10. Netlify will give you a public `*.netlify.app` address. Open it on your phone and test it.
+`config.js` is intentionally excluded from Git in `.gitignore`. For static Netlify hosting, deploy the configured file as part of the site bundle; if using Git-based deploys, either add it locally before deploying with Netlify CLI or use a build-time environment-variable approach. Do not commit private keys. The publishable key is designed for client use and is safe to expose when RLS is correctly configured.
 
-If the GitHub mobile interface hides upload options, use Chrome menu → **Desktop site**.
+## Supabase database
 
-## Important limitations
-- This prototype stores data only in the current browser on the current device. Clearing browser data can erase it.
-- It does not create accounts, sync between devices, connect to banks, show live market prices, provide personalized regulated advice, or place trades.
-- All balances are user-entered demo tracking values. No real money is moved.
-- The compound calculator is hypothetical and excludes fees, taxes, inflation and market losses.
+Run the SQL from `supabase-setup.sql` in the Supabase SQL Editor. This script adds a profile creation trigger, enables RLS, and creates per-user policies for the tables used by this app. It is designed to be safe to run after the initial WEALTHOS v2 database script.
 
-## Before real users / financial integrations
-Add authentication, a production database with per-user access controls, server-side validation, privacy policy, terms, security review, backups and appropriate regulatory/legal advice. Never store bank passwords or brokerage credentials in this static app.
+## Local test
+
+Serve this folder from a local web server (not by double-clicking `index.html`) or deploy it to Netlify. Then create a test account and confirm the email if confirmation is enabled.
+
+This is a tracker prototype. User-entered records are not verified bank transactions and the app does not transfer funds, connect to brokers, or execute investments.

@@ -3,108 +3,72 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0b1510">
-  <meta name="description" content="WEALTHOS helps you track savings, set goals and learn about investing.">
-  <title>WEALTHOS — Build your future</title>
+  <meta name="theme-color" content="#07130f">
+  <title>WEALTHOS — Your wealth, in motion</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="app-shell">
-    <header class="topbar">
-      <a class="brand" href="#" aria-label="WEALTHOS home"><span class="brand-mark">W</span><span>WEALTHOS</span></a>
-      <span class="demo-pill"><i></i> PERSONAL SPACE</span>
-    </header>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-mark">W</span><span>WEALTHOS</span></a>
+    <span class="secure-label">PRIVATE WEALTH SPACE</span>
+  </header>
+  <main class="shell">
+    <section id="auth-panel" class="panel auth-panel">
+      <p class="eyebrow">YOUR FINANCIAL JOURNEY</p>
+      <h1>Build wealth.<br><em>With intention.</em></h1>
+      <p class="muted">Create an account or sign in to access your saved goals and records.</p>
+      <div class="tabs">
+        <button id="show-login" class="tab active" type="button">Sign in</button>
+        <button id="show-signup" class="tab" type="button">Create account</button>
+      </div>
+      <form id="auth-form">
+        <label>Email address<input id="email" type="email" autocomplete="email" placeholder="you@example.com" required></label>
+        <label>Password<input id="password" type="password" autocomplete="current-password" minlength="8" placeholder="At least 8 characters" required></label>
+        <button id="auth-submit" class="primary full" type="submit">Sign in</button>
+      </form>
+      <p id="auth-message" class="message" role="status"></p>
+      <p class="fineprint">Your account is managed by Supabase. Use a unique password and never share it.</p>
+    </section>
 
-    <main>
-      <section class="welcome">
-        <div>
-          <p class="eyebrow">YOUR MONEY, WITH A PLAN</p>
-          <h1>Build wealth.<br><em>On your terms.</em></h1>
-          <p class="muted">A clearer view of your savings, goals and investing journey.</p>
-        </div>
-        <div class="hero-orb" aria-hidden="true"><span>W</span></div>
+    <section id="app-panel" class="hidden">
+      <div class="welcome-row">
+        <div><p class="eyebrow">YOUR PRIVATE WEALTH SPACE</p><h1>Welcome back<span class="accent">.</span></h1><p id="signed-in-as" class="muted"></p></div>
+        <button id="sign-out" class="ghost" type="button">Sign out</button>
+      </div>
+      <section class="balance-card">
+        <p class="eyebrow">TOTAL SAVED · USD</p>
+        <div id="total-saved" class="balance">$0.00</div>
+        <p class="muted small">Calculated from the savings goals you record here. Not a bank balance.</p>
       </section>
-
-      <section class="summary-grid" aria-label="Financial summary">
-        <article class="panel balance-panel">
-          <div class="panel-heading"><span>Total tracked savings</span><span class="tiny-icon">↗</span></div>
-          <div class="big-number" id="balance">$1.00</div>
-          <div class="subline"><span class="status-dot"></span> USD base currency <span class="demo-note">· Demo data</span></div>
-        </article>
-        <article class="panel goal-summary">
-          <div class="panel-heading"><span>Active goal</span><span class="goal-icon">◎</span></div>
-          <div class="goal-name" id="summaryGoalName">First $100</div>
-          <div class="progress-track"><div class="progress-fill" id="summaryProgress"></div></div>
-          <div class="subline" id="goalProgressText">$1 of $100 · 1% complete</div>
-        </article>
-      </section>
-
-      <nav class="tabs" aria-label="Main navigation">
-        <button class="tab active" data-tab="overview">Overview</button>
-        <button class="tab" data-tab="goals">Goals</button>
-        <button class="tab" data-tab="planner">Growth planner</button>
-        <button class="tab" data-tab="learn">Learn</button>
-      </nav>
-
-      <section class="view active" id="overview">
-        <div class="section-title"><div><p class="eyebrow">TAKE THE NEXT STEP</p><h2>Add to your savings</h2></div></div>
-        <form class="panel form-panel" id="depositForm">
-          <label for="depositAmount">Amount to add (USD)</label>
-          <div class="input-row"><span>$</span><input id="depositAmount" type="number" min="0.01" step="0.01" placeholder="5.00" required inputmode="decimal"><button class="primary-btn" type="submit">Add savings</button></div>
-          <p class="helper">This updates this device's demo tracker only. It does not move real money.</p>
-          <p class="notice success" id="depositNotice" role="status" hidden></p>
+      <div class="section-heading"><div><p class="eyebrow">YOUR PLAN</p><h2>Savings goals</h2></div></div>
+      <section class="panel">
+        <form id="goal-form" class="form-grid">
+          <label>Goal name<input id="goal-title" maxlength="80" placeholder="Emergency fund" required></label>
+          <label>Target amount (USD)<input id="goal-target" type="number" min="0.01" step="0.01" placeholder="1000" required></label>
+          <button class="primary" type="submit">Add goal</button>
         </form>
-        <div class="section-title"><div><p class="eyebrow">YOUR SNAPSHOT</p><h2>Money overview</h2></div></div>
-        <div class="mini-grid">
-          <article class="panel mini-card"><span class="mini-label">Total saved</span><strong id="miniBalance">$1.00</strong><span class="mini-caption">Tracked in this browser</span></article>
-          <article class="panel mini-card"><span class="mini-label">Next milestone</span><strong id="miniTarget">$100</strong><span class="mini-caption">Your active savings target</span></article>
-        </div>
-        <aside class="tip-card"><span class="tip-symbol">✦</span><div><strong>Small steps count.</strong><p>Choose an amount you can consistently save. Never invest money you need for essentials or emergencies.</p></div></aside>
+        <p id="goal-message" class="message" role="status"></p>
+        <div id="goals-list" class="goal-list"><p class="muted">Your goals will appear here.</p></div>
       </section>
-
-      <section class="view" id="goals">
-        <div class="section-title"><div><p class="eyebrow">MAKE IT CONCRETE</p><h2>Your savings goal</h2></div></div>
-        <form class="panel stacked-form" id="goalForm">
-          <label for="goalName">Goal name</label><input id="goalName" maxlength="40" value="First $100" required>
-          <label for="goalTarget">Target amount (USD)</label><input id="goalTarget" type="number" min="1" step="0.01" value="100" required inputmode="decimal">
-          <button class="primary-btn" type="submit">Save goal</button>
-          <p class="helper">Pick a specific, achievable target. You can change it at any time.</p>
+      <div class="section-heading"><div><p class="eyebrow">ACTIVITY</p><h2>Record a movement</h2></div></div>
+      <section class="panel">
+        <form id="transaction-form" class="form-grid">
+          <label>Type<select id="transaction-type"><option value="deposit">Deposit</option><option value="withdrawal">Withdrawal</option></select></label>
+          <label>Amount (USD)<input id="transaction-amount" type="number" min="0.01" step="0.01" placeholder="25.00" required></label>
+          <label class="wide">Note (optional)<input id="transaction-note" maxlength="160" placeholder="Weekly savings"></label>
+          <button class="primary" type="submit">Save record</button>
         </form>
-        <article class="panel goal-detail">
-          <div class="panel-heading"><span>YOUR PROGRESS</span><span class="tiny-icon">◎</span></div>
-          <div class="goal-detail-name" id="detailGoalName">First $100</div>
-          <div class="progress-track large"><div class="progress-fill" id="detailProgress"></div></div>
-          <div class="goal-stats"><div><strong id="goalCurrent">$1.00</strong><span>Saved</span></div><div><strong id="goalRemaining">$99.00</strong><span>Remaining</span></div><div><strong id="goalPercent">1%</strong><span>Complete</span></div></div>
-        </article>
+        <p id="transaction-message" class="message" role="status"></p>
+        <div id="transactions-list" class="transaction-list"><p class="muted">Your records will appear here.</p></div>
       </section>
-
-      <section class="view" id="planner">
-        <div class="section-title"><div><p class="eyebrow">PLAN, DON'T PREDICT</p><h2>Growth planner</h2></div></div>
-        <form class="panel stacked-form" id="plannerForm">
-          <label for="monthly">Monthly contribution (USD)</label><input id="monthly" type="number" min="0" step="0.01" value="20" inputmode="decimal">
-          <label for="years">Time horizon <output id="yearsOut">3 years</output></label><input id="years" type="range" min="1" max="20" value="3">
-          <label for="rate">Assumed annual return <output id="rateOut">5%</output></label><input id="rate" type="range" min="0" max="12" value="5">
-          <button class="primary-btn" type="submit">Calculate projection</button>
-          <div class="projection" id="projection" hidden><span class="eyebrow">ILLUSTRATIVE FUTURE VALUE</span><strong id="projectedValue">$0.00</strong><p id="projectionNote"></p></div>
-        </form>
-        <p class="risk-note">This is a mathematical illustration, not a forecast or promise. Actual investments can lose value. Returns, fees, taxes and inflation are not included.</p>
-      </section>
-
-      <section class="view" id="learn">
-        <div class="section-title"><div><p class="eyebrow">KNOW BEFORE YOU GROW</p><h2>Investing basics</h2></div></div>
-        <div class="learning-list">
-          <article class="panel lesson"><span class="lesson-icon">▦</span><div><h3>What is an ETF?</h3><p>An exchange-traded fund holds a basket of investments. It can provide diversification, but its value can still fall.</p></div></article>
-          <article class="panel lesson"><span class="lesson-icon">◉</span><div><h3>Why diversify?</h3><p>Spreading investments can reduce dependence on one company or asset. It does not remove market risk.</p></div></article>
-          <article class="panel lesson"><span class="lesson-icon">↗</span><div><h3>Compound growth</h3><p>Returns can earn returns over time. Compounding also works in reverse when investments lose value.</p></div></article>
-          <article class="panel lesson"><span class="lesson-icon">⌁</span><div><h3>Risk and time horizon</h3><p>Money needed soon generally belongs in lower-volatility, accessible places rather than stock investments.</p></div></article>
-        </div>
-        <aside class="tip-card"><span class="tip-symbol">!</span><div><strong>Safety first</strong><p>WEALTHOS is an educational tracker, not a broker or financial adviser. Verify providers with the relevant regulator and avoid guaranteed-return claims.</p></div></aside>
-      </section>
-    </main>
-    <footer><span class="brand-footer">WEALTHOS</span><span>Build wealth intelligently.</span><span>Prototype · No financial accounts connected</span></footer>
-  </div>
+      <p class="disclaimer">WEALTHOS is a tracking prototype. Records are user-entered and are not verified bank transactions, investment advice, or money transfers.</p>
+    </section>
+  </main>
+  <footer>WEALTHOS <span>·</span> Build your future, one step at a time.</footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
