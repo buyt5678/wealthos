@@ -31,7 +31,12 @@
     if (txRes.error) message("transaction-message", txRes.error.message, true);
     const goals = goalsRes.data || [], txs = txRes.data || [];
     const total = goals.reduce((sum,g)=>sum+Number(g.saved_amount||0),0);
-    $("total-saved").textContent = money(total);
+   $("total-saved").textContent = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  notation: "compact",
+  maximumFractionDigits: 2
+}).format(total);
     $("goals-list").innerHTML = goals.length ? goals.map(g => {
       const saved = Number(g.saved_amount||0), target = Number(g.target_amount||0);
       const pct = target > 0 ? Math.min(100, saved/target*100) : 0;
