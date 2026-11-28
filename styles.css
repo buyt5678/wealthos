@@ -32,6 +32,47 @@
 .withdraw-btn {
   background: #315b50;
 }
+.deposit-form {
+  margin-top: 18px;
+  padding: 20px;
+  background: #102820;
+  border: 1px solid #285743;
+  border-radius: 16px;
+  color: white;
+}
+
+.deposit-form h3 {
+  margin-top: 0;
+  font-size: 20px;
+}
+
+.deposit-form p {
+  color: #a8c4b5;
+  font-size: 14px;
+}
+
+.deposit-form input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 10px 0 15px;
+  padding: 13px;
+  border: 1px solid #456b59;
+  border-radius: 9px;
+  background: #091c15;
+  color: white;
+}
+
+.deposit-form button {
+  padding: 12px 18px;
+  margin-right: 8px;
+  border: none;
+  border-radius: 9px;
+  background: #16865b;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
 
 .transfer-btn {
   background: #456b63;
