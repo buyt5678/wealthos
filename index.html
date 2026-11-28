@@ -41,10 +41,31 @@
         <p class="eyebrow">TOTAL SAVED · USD</p>
         <div id="total-saved" class="balance">$0.00</div>
         <div class="money-actions">
-  <button class="deposit-btn" onclick="alert('Deposits coming soon!')">Deposit</button>
+<button class="deposit-btn" onclick="document.getElementById('deposit-form').style.display='block'">Deposit</button>
   <button class="withdraw-btn" onclick="alert('Withdrawals coming soon!')">Withdraw</button>
   <button class="transfer-btn" onclick="alert('Transfers coming soon!')">Transfer</button>
 </div>
+       <div id="deposit-form" class="deposit-form" style="display:none;">
+  <h3>Deposit Funds</h3>
+  <p>Enter the amount you want to deposit.</p>
+
+  <label for="deposit-amount">Amount (NGN)</label>
+  <input
+    id="deposit-amount"
+    type="number"
+    min="100"
+    placeholder="Enter amount in naira"
+    required
+  >
+
+  <button type="button" onclick="alert('Secure payment setup is not active yet. No money has been charged.')">
+    Continue
+  </button>
+
+  <button type="button" onclick="document.getElementById('deposit-form').style.display='none'">
+    Cancel
+  </button>
+</div> 
         <p class="muted small">Calculated from the savings goals you record here. Not a bank balance.</p>
       </section>
       <div class="section-heading"><div><p class="eyebrow">YOUR PLAN</p><h2>Savings goals</h2></div></div>
