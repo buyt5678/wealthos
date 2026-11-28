@@ -7,3 +7,32 @@
   max-width: 100%;
   min-width: 0;
 }
+.money-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.money-actions button {
+  flex: 1;
+  min-width: 90px;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  color: white;
+}
+
+.deposit-btn {
+  background: #16865b;
+}
+
+.withdraw-btn {
+  background: #315b50;
+}
+
+.transfer-btn {
+  background: #456b63;
+}
