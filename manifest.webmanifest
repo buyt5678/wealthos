@@ -1,1 +1,48 @@
 {"name":"WEALTHOS","short_name":"WEALTHOS","start_url":"./","display":"standalone","background_color":"#07130f","theme_color":"#07130f","icons":[{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]}
+.money-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  width: 100%;
+}
+
+.money-actions button {
+  flex: 1;
+  padding: 13px 10px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.deposit-btn {
+  background: #16865b;
+}
+
+.withdraw-btn {
+  background: #263f38;
+  border-color: #49675c !important;
+}
+
+.transfer-btn {
+  background: #315b50;
+}
+
+.money-actions button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.15);
+}
+
+@media (max-width: 480px) {
+  .money-actions {
+    gap: 8px;
+  }
+
+  .money-actions button {
+    padding: 12px 5px;
+    font-size: 12px;
+  }
+}
